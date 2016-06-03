@@ -71,12 +71,15 @@ app.post('/meme', function(req, res){
               var imglink = jsonobj.direct.visible;
               console.log(imglink);
               var result = {
-                "attachments":[
-                    {
-                        "title": toptext + " " + bottomtext,
-                        "image_url": imglink
-                    }
-                ]
+                      "response_type": "in_channel",
+                      "attachments":[
+                          {
+                              "title": "test",
+                              "image_url": imglink
+                          }
+                      ],
+                      "unfurl_media":true,
+                  "unfurl_links":true
               }
               res.send(result);
             }
