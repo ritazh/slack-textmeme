@@ -71,9 +71,7 @@ app.post('/meme', function(req, res){
                               "title": "test",
                               "image_url": imglink
                           }
-                      ],
-                      "unfurl_media":true,
-                  "unfurl_links":true
+                      ]
               }
               res.send(result);
             }
