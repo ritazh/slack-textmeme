@@ -35,7 +35,7 @@ app.post('/meme', function(req, res){
         var jsonobj = JSON.parse(body);
         var links = "";
         for (var key in jsonobj) {
-          links += key + "\n";
+          links += "`" + key + "`\n";
         }
         var result = {
             "text": links
@@ -71,16 +71,12 @@ app.post('/meme', function(req, res){
               var imglink = jsonobj.direct.visible;
               console.log(imglink);
               var result = {
-                      "parse": "full",
-                      "response_type": "in_channel",
-                      "text": "",
-                      "attachments":[
-                          {
-                              "image_url": imglink
-                          }
-                      ],
-                      "unfurl_media":true,
-                  "unfurl_links":true
+                "attachments":[
+                    {
+                        "title": toptext + " " + bottomtext,
+                        "image_url": imglink
+                    }
+                ]
               }
               res.send(result);
             }

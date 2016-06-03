@@ -1,10 +1,10 @@
 # Slack Text Meme
 
-_A sample Slackbot that creates a text meme_.
+_A sample Slackbot that creates a meme with text_.
 
 ![]()
 
-This Slackbot creates a texted mem from [memegen](http://memegen.link).
+This Slackbot creates a texted meme using [memegen](http://memegen.link).
 
 A detailed tutorial about how I built this is on Medium: []()
 
@@ -30,17 +30,15 @@ Setup Slack slash command:
 * Goto `http://[your-slack-team].slack.com/apps/manage/custom-integrations` and add a slash command.
 * Fill in the fields:
   * _Command_: the name of your slash command (ex: `/textmeme`)
-  * _URL_: The URL to request when the slash command is run (ex: `https://my-slacktextmemebot.[deishost]/meme/_memename_/_toptext_/_bottomtext_`)
-  * _Method_: GET
-
-
+  * _URL_: The URL to request when the slash command is run (ex: `https://slacktextmemebot.[your  host]/meme`)
+  * _Method_: POST
 
 
 ## Usage
 
 In Slack, send slash commands to /textmeme:
 
-    /textmeme doge; This BOT is; AWESOME;
+    /textmeme confession bear; This BOT is; AWESOME;
     /textmeme memes;
 
 
