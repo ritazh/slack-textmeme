@@ -58,6 +58,55 @@ app.get('/meme/:name/:toptext/:bottomtext', function(req, res){
   });
 });
 
+app.post('/meme', function(req, res){
+  var commandtext = req.body.text;
+  console.log(commandtext);
+  if(commandtext == "templates"){
+    var parsed_url = url.format({
+      pathname: 'http://memegen.link/templates'
+    });
+
+    request(parsed_url, function (error, response, body) {
+      if (!error && response.statusCode == 200) {
+        var jsonobj = JSON.parse(body);
+        res.send(jsonobj);
+      }
+    });
+  }else{
+      var parsed_url = url.format({
+        pathname: 'http://memegen.link/templates'
+      });
+
+      request(parsed_url, function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+          var jsonobj = JSON.parse(body);
+          var link = "";
+          console.log("start");
+          
+          for (var key in jsonobj) {
+            if(key.toUpperCase() == req.params.name.toUpperCase()){
+                link = jsonobj[key] + "/" + req.params.toptext + "/" + req.params.bottomtext;
+            }
+          }
+          console.log(link);
+          request(link, function (error, response, body) {
+            if (!error && response.statusCode == 200) {
+              var jsonobj = JSON.parse(body);
+              var imglink = jsonobj.direct.visible;
+              console.log(imglink);
+              request(imglink, function (error, response, body) {
+                if (!error && response.statusCode == 200) {
+                  res.send(body);
+                }
+              });
+            }
+          });
+        }
+    });
+  }
+  
+});
+
 app.post('/post', function(req, res){
   var parsed_url = url.format({
     pathname: 'http://memegen.link/templates',
