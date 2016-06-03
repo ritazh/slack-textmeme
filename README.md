@@ -1,36 +1,33 @@
 # Slack Text Meme
 
-_A sample Slackbot that creates a meme with text_.
+_A Slackbot that creates a meme with text_.
 
 ![]()
 
-This Slackbot creates a texted meme using [memegen](http://memegen.link).
-
-A detailed tutorial about how I built this is on Medium: []()
+This Slackbot creates a meme with text overlay using [memegen](http://memegen.link).
 
 ## Installation
 
-Clone the repo and then install dependencies:
+Clone this repo and then install dependencies:
 
-    git clone 
+    git clone https://github.com/ritazh/slack-textmeme.git
     cd slack-textmeme
     npm i
 
 
 Setup the server (using Deis):
 
-    deis create my-slacktextmemebot
+    deis create slacktextmemebot
     git push deis master
 
-## Test API
-curl -X POST -H "Content-Type: application/json" -d {"templates"} http://zydeco-gatepost.deisdemo.40.78.99.3.xip.io/meme
 
 Setup Slack slash command:
 
-* Goto `http://[your-slack-team].slack.com/apps/manage/custom-integrations` and add a slash command.
-* Fill in the fields:
-  * _Command_: the name of your slash command (ex: `/textmeme`)
-  * _URL_: The URL to request when the slash command is run (ex: `https://slacktextmemebot.[your  host]/meme`)
+* Goto `http://[your-slack-org].slack.com/apps/manage/custom-integrations` 
+* Add a slash command
+* Fill in the following fields:
+  * _Command_: the name of your slash command (example: `/textmeme`)
+  * _URL_: The URL to request when the slash command is run (example: `https://slacktextmemebot.[your  host]/meme`)
   * _Method_: POST
 
 
@@ -38,17 +35,9 @@ Setup Slack slash command:
 
 In Slack, send slash commands to /textmeme:
 
-    /textmeme confession bear; This BOT is; AWESOME;
+    /textmeme doge; This BOT is; AWESOME;
     /textmeme memes;
 
 
 ## License
-
-The MIT License (MIT)
-Copyright (c) 2016 Andrew Mager
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+Licensed using the MIT License (MIT); Copyright (c) Microsoft Corporation. For more information, please see [LICENSE](LICENSE).

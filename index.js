@@ -15,15 +15,10 @@ app.get('/', function(req, res){
 
 app.post('/meme', function(req, res){
   var commandtext = req.body.text;
-  console.log(commandtext);
   var cmds = commandtext.split(';');
-  console.log(cmds);
   var name = cmds[0];
   var toptext = cmds[1];
   var bottomtext = cmds[2];
-  console.log(name);
-  console.log(toptext);
-  console.log(bottomtext);
   if(name == "memes"){
     var parsed_url = url.format({
       pathname: 'http://memegen.link/templates'
@@ -64,7 +59,6 @@ app.post('/meme', function(req, res){
           if(link == ""){
             res.send({"text": "Hmmm...seems we cannot find the meme '" + name + "'. Try another meme!"});
           }
-          console.log(link);
           request(link, function (error, response, body) {
             if (!error && response.statusCode == 200) {
               var jsonobj = JSON.parse(body);
