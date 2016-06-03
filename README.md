@@ -40,7 +40,7 @@ Setup Slack slash command:
 
 In Slack, send slash commands to /textmeme:
 
-    /textmeme doge; hello; text mem bot;
+    /textmeme doge; This BOT is; AWESOME;
     /textmeme memes;
 
 

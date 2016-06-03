@@ -13,51 +13,6 @@ app.get('/', function(req, res){
   res.send('It works!');
 });
 
-app.get('/mem/', function(req, res){
-  var parsed_url = url.format({
-    pathname: 'http://memegen.link/templates'
-  });
-
-  request(parsed_url, function (error, response, body) {
-    if (!error && response.statusCode == 200) {
-      res.send(body);
-    }
-  });
-});
-
-app.get('/meme/:name/:toptext/:bottomtext', function(req, res){
-  var parsed_url = url.format({
-    pathname: 'http://memegen.link/templates'
-  });
-
-  request(parsed_url, function (error, response, body) {
-    if (!error && response.statusCode == 200) {
-      var jsonobj = JSON.parse(body);
-      var link = "";
-      console.log("start");
-      
-      for (var key in jsonobj) {
-        if(key.toUpperCase() == req.params.name.toUpperCase()){
-            link = jsonobj[key] + "/" + req.params.toptext + "/" + req.params.bottomtext;
-        }
-      }
-      console.log(link);
-      request(link, function (error, response, body) {
-        if (!error && response.statusCode == 200) {
-          var jsonobj = JSON.parse(body);
-          var imglink = jsonobj.direct.visible;
-          console.log(imglink);
-          request(imglink, function (error, response, body) {
-            if (!error && response.statusCode == 200) {
-              res.send(body);
-            }
-          });
-        }
-  });
-    }
-  });
-});
-
 app.post('/meme', function(req, res){
   var commandtext = req.body.text;
   console.log(commandtext);
@@ -76,10 +31,19 @@ app.post('/meme', function(req, res){
 
     request(parsed_url, function (error, response, body) {
       if (!error && response.statusCode == 200) {
+
         var jsonobj = JSON.parse(body);
-        res.send(jsonobj);
+        var links = "";
+        for (var key in jsonobj) {
+          links += key + "\n";
+        }
+        var result = {
+            "text": links
+        }
+        res.send(result);
       }
     });
+    
   }else{
       var parsed_url = url.format({
         pathname: 'http://memegen.link/templates'
@@ -105,7 +69,6 @@ app.post('/meme', function(req, res){
               var result = {
                       "parse": "full",
                       "response_type": "in_channel",
-                      "text": imglink,
                       "attachments":[
                           {
                               "image_url": imglink
@@ -121,21 +84,6 @@ app.post('/meme', function(req, res){
     });
   }
   
-});
-
-app.post('/post', function(req, res){
-  var parsed_url = url.format({
-    pathname: 'http://memegen.link/templates',
-    query: {
-      q: req.body.text
-    }
-  });
-
-  request(parsed_url, function (error, response, body) {
-    if (!error && response.statusCode == 200) {
-      res.send(body);
-    }
-  });
 });
 
 app.listen(app.get('port'), function() {
