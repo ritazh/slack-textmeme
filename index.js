@@ -24,7 +24,7 @@ app.post('/meme', function(req, res){
   console.log(name);
   console.log(toptext);
   console.log(bottomtext);
-  if(name == "templates"){
+  if(name == "memes"){
     var parsed_url = url.format({
       pathname: 'http://memegen.link/templates'
     });
@@ -43,7 +43,7 @@ app.post('/meme', function(req, res){
         res.send(result);
       }
     });
-    
+
   }else{
       var parsed_url = url.format({
         pathname: 'http://memegen.link/templates'
@@ -53,12 +53,16 @@ app.post('/meme', function(req, res){
         if (!error && response.statusCode == 200) {
           var jsonobj = JSON.parse(body);
           var link = "";
-          console.log("start");
           
           for (var key in jsonobj) {
             if(key.toUpperCase() == name.toUpperCase()){
                 link = jsonobj[key] + "/" + toptext + "/" + bottomtext;
+                break;
             }
+          }
+
+          if(link == ""){
+            res.send({"text": "Hmmm...seems we cannot find the meme '" + name + "'. Try another meme!"});
           }
           console.log(link);
           request(link, function (error, response, body) {
@@ -69,6 +73,7 @@ app.post('/meme', function(req, res){
               var result = {
                       "parse": "full",
                       "response_type": "in_channel",
+                      "text": "",
                       "attachments":[
                           {
                               "image_url": imglink
