@@ -22,6 +22,8 @@ Setup the server (using Deis):
     deis create my-slacktextmemebot
     git push deis master
 
+## Test API
+curl -X POST -H "Content-Type: application/json" -d {"templates"} http://zydeco-gatepost.deisdemo.40.78.99.3.xip.io/meme
 
 Setup Slack slash command:
 

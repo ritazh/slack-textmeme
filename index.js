@@ -61,7 +61,15 @@ app.get('/meme/:name/:toptext/:bottomtext', function(req, res){
 app.post('/meme', function(req, res){
   var commandtext = req.body.text;
   console.log(commandtext);
-  if(commandtext == "templates"){
+  var cmds = commandtext.split(';');
+  console.log(cmds);
+  var name = cmds[0];
+  var toptext = cmds[1];
+  var bottomtext = cmds[2];
+  console.log(name);
+  console.log(toptext);
+  console.log(bottomtext);
+  if(name == "templates"){
     var parsed_url = url.format({
       pathname: 'http://memegen.link/templates'
     });
@@ -84,8 +92,8 @@ app.post('/meme', function(req, res){
           console.log("start");
           
           for (var key in jsonobj) {
-            if(key.toUpperCase() == req.params.name.toUpperCase()){
-                link = jsonobj[key] + "/" + req.params.toptext + "/" + req.params.bottomtext;
+            if(key.toUpperCase() == name.toUpperCase()){
+                link = jsonobj[key] + "/" + toptext + "/" + bottomtext;
             }
           }
           console.log(link);
