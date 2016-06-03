@@ -102,11 +102,19 @@ app.post('/meme', function(req, res){
               var jsonobj = JSON.parse(body);
               var imglink = jsonobj.direct.visible;
               console.log(imglink);
-              request(imglink, function (error, response, body) {
-                if (!error && response.statusCode == 200) {
-                  res.send(body);
-                }
-              });
+              var result = {
+                      "parse": "full",
+                      "response_type": "in_channel",
+                      "text": imglink,
+                      "attachments":[
+                          {
+                              "image_url": imglink
+                          }
+                      ],
+                      "unfurl_media":true,
+                  "unfurl_links":true
+              }
+              res.send(result);
             }
           });
         }
