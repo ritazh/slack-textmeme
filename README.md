@@ -2,7 +2,7 @@
 
 _A Slackbot that creates a meme with text_.
 
-![]()
+![Slack Text Meme Demo](textmeme.gif)
 
 This Slackbot creates a meme with text overlay using [memegen](http://memegen.link).
 
