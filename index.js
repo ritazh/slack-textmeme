@@ -68,7 +68,7 @@ app.post('/meme', function(req, res){
                       "response_type": "in_channel",
                       "attachments":[
                           {
-                              "title": "test",
+                              "title": toptext + " " + bottomtext,
                               "image_url": imglink
                           }
                       ]
