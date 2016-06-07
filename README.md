@@ -23,7 +23,7 @@ Setup the server (using Deis):
 
 Setup Slack slash command:
 
-* Goto `http://[your-slack-org].slack.com/apps/manage/custom-integrations` 
+* Go to `http://[your-slack-org].slack.com/apps/manage/custom-integrations` 
 * Add a slash command
 * Fill in the following fields:
   * _Command_: the name of your slash command (example: `/textmeme`)
