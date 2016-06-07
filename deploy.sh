@@ -8,6 +8,7 @@ ls -ltr
 git add .
 git commit -m "Deploy"
 openssl aes-256-cbc -d -k password -in deis.enc -out deis.key -a
+
 cat ./deis.key
 
 # deis login http://deis.deisdemo.40.78.99.3.xip.io
