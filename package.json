@@ -22,6 +22,9 @@
     "type": "git",
     "url": "git+https://github.com/ritazh/slack-textmeme.git"
   },
+  "engines": {
+    "node": ">=6.0.0"
+  },
   "author": "ritazh",
   "license": "MIT",
   "bugs": {
