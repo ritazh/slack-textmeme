@@ -29,7 +29,8 @@ chmod 600 ./deis.key
 ssh-add ./deis.key
 
 echo 'Private keys added. Starting Deis Deployment'
-yes | git remote add deis $GIT_TARGET_URL
+echo -e "Host deis.deisdemo.40.78.99.3.xip.io\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+git remote add deis $GIT_TARGET_URL
 
 git push -f deis master
 
