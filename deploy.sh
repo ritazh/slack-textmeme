@@ -21,7 +21,6 @@ cat ./deis.key
 DEIS_HOST="[deis.deisdemo.40.78.99.3.xip.io]:2222,[40.78.99.3]:2222"
 DEIS_VM="40.78.99.3"
 echo $DEIS_HOST > ~/.ssh/known_hosts
-echo $DEIS_VM > ~/.ssh/known_hosts
 cat ~/.ssh/known_hosts
 
 GIT_TARGET_URL="ssh://git@deis.deisdemo.40.78.99.3.xip.io:2222/zydeco-gatepost.git "
