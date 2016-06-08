@@ -1,4 +1,5 @@
 # Slack Text Meme
+[![Build Status](https://travis-ci.org/ritazh/slack-textmeme.svg?branch=master)](https://travis-ci.org/ritazh/slack-textmeme)
 
 _A Slackbot that creates a meme with text_.
 

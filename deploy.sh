@@ -9,11 +9,6 @@ git add .
 git commit -m "Deploy"
 openssl aes-256-cbc -d -k password -in deis.enc -out deis.key -a
 
-# deis login http://deis.deisdemo.40.78.99.3.xip.io
-# send "deis\r"
-# send "deis\r"
-# deis apps
-
 # write the trusted host to the known hosts file
 # to avoid a prompt when connecting to it via ssh
 DEIS_HOST="[deis.deisdemo.40.78.99.3.xip.io]:2222,[40.78.99.3]:2222"
