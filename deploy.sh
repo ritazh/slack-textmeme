@@ -19,7 +19,6 @@ cat ./deis.key
 # write the trusted host to the known hosts file
 # to avoid a prompt when connecting to it via ssh
 DEIS_HOST="[deis.deisdemo.40.78.99.3.xip.io]:2222,[40.78.99.3]:2222"
-DEIS_VM="40.78.99.3"
 echo $DEIS_HOST > ~/.ssh/known_hosts
 cat ~/.ssh/known_hosts
 
