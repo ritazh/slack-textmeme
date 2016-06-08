@@ -24,8 +24,9 @@ ssh-agent -s
 chmod 600 ./deis.key
 ssh-add ./deis.key
 
-echo 'Private keys added. Starting Dokku Deployment'
+echo 'Private keys added. Starting Deis Deployment'
 git remote add deis $GIT_TARGET_URL
+send "yes\r"
 
 git push -f deis master
 
