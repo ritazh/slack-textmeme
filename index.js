@@ -15,7 +15,7 @@ var appSecret = process.env.appSecret || 'ec470402ed6d4f2c9e40e597bc4cff73';
 var credentials = null; //new msRest.BasicAuthenticationCredentials(appId, appSecret);
 
 // Handle incoming message
-server.post('/v1/messages', verifyBotFramework(credentials), function (req, res) {
+server.post('/meme', verifyBotFramework(credentials), function (req, res) {
     var msg = req.body;
     if (/^delay/i.test(msg.text)) {
         // Delay sending the reply for 5 seconds
