@@ -1,3 +1,5 @@
+'use strict'
+
 var restify = require('restify');
 var msRest = require('ms-rest');
 var connector = require('botconnector');
@@ -8,22 +10,29 @@ server.use(restify.authorizationParser());
 server.use(restify.bodyParser());
 
 // Initialize credentials for connecting to Bot Connector Service
-var appId = process.env.appId || 'your appId';
-var appSecret = process.env.appSecret || 'your appSecret';
+var appId = process.env.appId || 'textmeme';
+var appSecret = process.env.appSecret || 'ec470402ed6d4f2c9e40e597bc4cff73';
 var credentials = new msRest.BasicAuthenticationCredentials(appId, appSecret);
 
 // Handle incoming message
 server.post('/meme', verifyBotFramework(credentials), function (req, res) {
 	var msg = req.body;
 	console.log("using new bot")
-	console.log(msg)
-    const [name] = req.body.text.split(';')
-
-	if (name === 'memes') {
-		return memes.returnAvailableMemes(req, res)
-	} else {
-	    return memes.returnMeme(req, res)
-	}
+	if (/^delay/i.test(msg.text)) {
+        // Delay sending the reply for 5 seconds
+        setTimeout(function () {
+            var reply = { 
+                replyToMessageId: msg.id,
+                to: msg.from,
+                from: msg.to,
+                text: 'I heard "' + msg.text.substring(6) + '"'
+            };
+            sendMessage(reply);
+        }, 5000);
+        res.send({ text: 'ok... sending reply in 5 seconds.' })
+    } else {
+        res.send({ text: 'I heard "' + msg.text + '". Say "delay {msg}" to send with a 5 second delay.' })
+    }
 });
 
 // Start server
