@@ -24,10 +24,10 @@ server.post('/v1/messages', verifyBotFramework(credentials), function (req, res)
 
   	if (name === 'memes') {
   		console.log('get list of memes')
-    	var message = memes.returnAvailableMemes(req, res)
-    	res.send(message)
+    	memes.returnAvailableMemes(req, res)
   	} else {
-    	return memes.returnMeme(req, res)
+  		console.log('get one meme')
+    	memes.returnMeme(req, res)
   	}
 });
 
