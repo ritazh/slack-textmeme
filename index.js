@@ -19,11 +19,13 @@ var credentials = null; //new msRest.BasicAuthenticationCredentials(appId, appSe
 // Handle incoming message
 server.post('/v1/messages', verifyBotFramework(credentials), function (req, res) {
     var msg = req.body;
-    console.log(msg)
+    console.log(req.body.text)
     const [name] = req.body.text.split(';')
 
   	if (name === 'memes') {
-    	return memes.returnAvailableMemes(req, res)
+  		console.log('get list of memes')
+    	var message = memes.returnAvailableMemes(req, res)
+    	sendMessage(message)
   	} else {
     	return memes.returnMeme(req, res)
   	}
