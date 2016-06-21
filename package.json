@@ -5,6 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "body-parser": "^1.14.2",
+    "botbuilder": "^1.0.1",
     "botconnector": "^0.9.6",
     "ejs": "2.3.3",
     "express": "4.13.3",

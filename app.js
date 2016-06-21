@@ -14,7 +14,7 @@ server.use(restify.bodyParser());
 // Initialize credentials for connecting to Bot Connector Service
 var appId = process.env.appId || 'textmeme';
 var appSecret = process.env.appSecret || 'ec470402ed6d4f2c9e40e597bc4cff73';
-var credentials = null; //new msRest.BasicAuthenticationCredentials(appId, appSecret);
+var credentials = new msRest.BasicAuthenticationCredentials(appId, appSecret);
 
 // Handle incoming message
 server.post('/v1/messages', verifyBotFramework(credentials), function (req, res) {
@@ -24,10 +24,52 @@ server.post('/v1/messages', verifyBotFramework(credentials), function (req, res)
 
   	if (name === 'memes') {
   		console.log('get list of memes')
-    	memes.returnAvailableMemes(req, res)
+        memes.returnAvailableMemes(req, function (message) {
+        var reply = {
+        	"replyToMessageId": msg.id,
+            "to": msg.from,
+            "from": msg.to,
+        	"type": "Message",
+        	"language": "en",
+        	"text": message
+    	}
+        	res.send(reply)
+        })
+    	
   	} else {
   		console.log('get one meme')
-    	memes.returnMeme(req, res)
+    	memes.returnMeme(req, function (message, link) {
+	        var reply = {
+	        	"type": "Message",
+	        	"language": "en",
+	        	"text": '',
+	        	"channelData":
+	        	{
+	            	"attachments": [
+	                	{
+		                    "title": message,
+		                    "title_link": "",
+
+		                    "text": '',
+
+		                    "fields": [
+		                        {
+		                            "title": "",
+		                            "value": "",
+		                            "short": false
+		                        }
+		                    ],
+
+		                    "image_url": link,
+		                    "thumb_url": link
+		                }
+	            	],
+		            "unfurl_links":false,
+		            "unfurl_media":false,
+	        	}
+	    	}
+        	res.send(reply)
+        })
   	}
 });
 
@@ -40,8 +82,7 @@ server.listen(process.env.PORT || 5000, function () {
 function verifyBotFramework(credentials) {
     return function (req, res, next) {
     	console.log('verifyBotFramework')
-    	next()
-    	/*
+    	
         if (req.authorization && 
             req.authorization.basic && 
             req.authorization.basic.username == credentials.userName &&
@@ -51,7 +92,7 @@ function verifyBotFramework(credentials) {
         } else {
             res.send(403);
         }
-        */
+        
     };
 }
 
@@ -59,9 +100,11 @@ function verifyBotFramework(credentials) {
 function sendMessage(msg, cb) {
 	console.log('sendMessage')
     var client = new connector(credentials);
-    var options = { };//customHeaders: {'Ocp-Apim-Subscription-Key': credentials.password}};
+	console.log('after client is created')
+    var options = {customHeaders: {'Ocp-Apim-Subscription-Key': credentials.password}};
     client.messages.sendMessage(msg, options, function (err, result, request, response) {
         if (!err && response && response.statusCode >= 400) {
+			console.log(response.statusMessage)
             err = new Error('Message rejected with "' + response.statusMessage + '"');
         }
         if (cb) {
