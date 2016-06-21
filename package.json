@@ -8,8 +8,10 @@
     "botconnector": "^0.9.6",
     "ejs": "2.3.3",
     "express": "4.13.3",
+    "ms-rest": "^1.14.3",
     "node-fetch": "1.5.3",
-    "request": "^2.67.0"
+    "request": "^2.67.0",
+    "restify": "^4.1.1"
   },
   "devDependencies": {
     "chai": "^3.5.0",
