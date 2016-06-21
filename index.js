@@ -17,6 +17,7 @@ var credentials = null; //new msRest.BasicAuthenticationCredentials(appId, appSe
 // Handle incoming message
 server.post('/v1/messages', verifyBotFramework(credentials), function (req, res) {
     var msg = req.body;
+    console.log(msg)
     if (/^delay/i.test(msg.text)) {
         // Delay sending the reply for 5 seconds
         setTimeout(function () {
