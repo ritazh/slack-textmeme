@@ -25,7 +25,7 @@ server.post('/v1/messages', verifyBotFramework(credentials), function (req, res)
   	if (name === 'memes') {
   		console.log('get list of memes')
     	var message = memes.returnAvailableMemes(req, res)
-    	sendMessage(message)
+    	res.send(message)
   	} else {
     	return memes.returnMeme(req, res)
   	}
