@@ -12,7 +12,7 @@ server.use(restify.bodyParser());
 // Initialize credentials for connecting to Bot Connector Service
 var appId = process.env.appId || 'textmeme';
 var appSecret = process.env.appSecret || 'ec470402ed6d4f2c9e40e597bc4cff73';
-var credentials = new msRest.BasicAuthenticationCredentials(appId, appSecret);
+var credentials = null; //new msRest.BasicAuthenticationCredentials(appId, appSecret);
 
 // Handle incoming message
 server.post('/v1/messages', verifyBotFramework(credentials), function (req, res) {
@@ -42,6 +42,9 @@ server.listen(process.env.PORT || 5000, function () {
 // Middleware to verfiy that requests are only coming from the Bot Connector Service
 function verifyBotFramework(credentials) {
     return function (req, res, next) {
+    	console.log('verifyBotFramework')
+    	next()
+    	/*
         if (req.authorization && 
             req.authorization.basic && 
             req.authorization.basic.username == credentials.userName &&
@@ -51,13 +54,15 @@ function verifyBotFramework(credentials) {
         } else {
             res.send(403);
         }
+        */
     };
 }
 
 // Helper function to send a Bot originated message to the user. 
 function sendMessage(msg, cb) {
+	console.log('sendMessage')
     var client = new connector(credentials);
-    var options = { customHeaders: {'Ocp-Apim-Subscription-Key': credentials.password}};
+    var options = { };//customHeaders: {'Ocp-Apim-Subscription-Key': credentials.password}};
     client.messages.sendMessage(msg, options, function (err, result, request, response) {
         if (!err && response && response.statusCode >= 400) {
             err = new Error('Message rejected with "' + response.statusMessage + '"');
