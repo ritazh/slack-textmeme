@@ -21,6 +21,7 @@ Setup the server (using Deis):
     deis create slacktextmemebot
     git push deis master
 
+Or you can also push the app to Azure web service
 
 Setup Slack slash command:
 
