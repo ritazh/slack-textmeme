@@ -14,7 +14,7 @@ Clone this repo and then install dependencies:
     git clone https://github.com/ritazh/slack-textmeme.git
     cd slack-textmeme
     git checkout botframework
-    npm i
+    npm install
 
 Push directly to Azure Web App:
     The current Travis CI is setup to push directly to an Azure web app
