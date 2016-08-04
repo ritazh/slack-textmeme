@@ -1,4 +1,4 @@
-# Slack Text Meme
+# Slack Text Meme with Microsoft Bot Framework
 [![Build Status](https://travis-ci.org/ritazh/slack-textmeme.svg?branch=master)](https://travis-ci.org/ritazh/slack-textmeme)
 
 _A Slackbot that creates a meme with text_.
@@ -13,31 +13,27 @@ Clone this repo and then install dependencies:
 
     git clone https://github.com/ritazh/slack-textmeme.git
     cd slack-textmeme
+    git checkout botframework
     npm i
 
-
+Push directly to Azure Web App:
+    The current Travis CI is setup to push directly to an Azure web app
+    
 Setup the server (using Deis):
 
     deis create slacktextmemebot
     git push deis master
 
 
-Setup Slack slash command:
-
-* Go to `http://[your-slack-org].slack.com/apps/manage/custom-integrations` 
-* Add a slash command
-* Fill in the following fields:
-  * _Command_: the name of your slash command (example: `/textmeme`)
-  * _URL_: The URL to request when the slash command is run (example: `https://slacktextmemebot.[your  host]/meme`)
-  * _Method_: POST
-
+Setup Slack bot:
+* Follow the instructions on Bot Framework website to setup a Slack Channel
 
 ## Usage
 
-In Slack, send slash commands to /textmeme:
+In Slack, after adding the textmeme bot user to a channel, you can start with:
 
-    /textmeme doge; This BOT is; AWESOME;
-    /textmeme memes;
+    memes
+    doge; This BOT is; AWESOME;
 
 
 ## License
