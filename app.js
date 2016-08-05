@@ -42,7 +42,7 @@ server.post('/v1/messages', verifyBotFramework(credentials), function (req, res)
     console.log('get one meme')
     memes.returnMeme(req, function (message, link) {
       if (!link) {
-        res.send(message)
+        link = ''
       }
       var reply = {
         'type': 'Message',
