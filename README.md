@@ -5,7 +5,7 @@ _A Slackbot that creates a meme with text_.
 
 ![Slack Text Meme Demo](textmeme.gif)
 
-This Slackbot creates a meme with text overlay using [memegen](http://memegen.link).
+This Slack slash command creates a meme with text overlay using [memegen](http://memegen.link).
 
 ## Installation
 
@@ -15,13 +15,7 @@ Clone this repo and then install dependencies:
     cd slack-textmeme
     npm i
 
-
-Setup the server (using Deis):
-
-    deis create slacktextmemebot
-    git push deis master
-
-Or you can also push the app to Azure web service
+Push the app to Azure web app
 
 Setup Slack slash command:
 
