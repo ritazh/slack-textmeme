@@ -13,7 +13,7 @@ Clone this repo and then install dependencies:
 
     git clone https://github.com/ritazh/slack-textmeme.git
     cd slack-textmeme
-    git checkout botframework
+    git checkout botframeworkdeis
     npm install
 
 Push directly to Azure Web App:
@@ -21,8 +21,8 @@ Push directly to Azure Web App:
     
 Setup the server (using Deis):
 
-    deis create slacktextmemebot
-    git push deis master
+    deis create
+    git push deis botframeworkdeis
 
 
 Setup Slack bot:
