@@ -21,7 +21,7 @@
     "standard": "^7.1.2"
   },
   "scripts": {
-    "test": "standard && mocha"
+    "test": "standard"
   },
   "repository": {
     "type": "git",
