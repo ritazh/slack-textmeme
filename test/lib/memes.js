@@ -12,8 +12,13 @@ describe('Memes', () => {
           this.sentData = data
         }
       }
+      const msg = {
+        id: 'id',
+        from: 'from',
+        to: 'to'
+      }
 
-      return memes.returnAvailableMemes(null, res)
+      return memes.returnAvailableMemes(null, msg, res)
         .then(() => {
           res.sentData.text.should.contain('One Does Not Simply Walk into Mordor')
           res.sentData.text.should.contain('Futurama Fry')
@@ -38,10 +43,11 @@ describe('Memes', () => {
       return memes.returnMeme(req, res)
         .then(() => {
           res.sentData.should.be.ok
-          res.sentData.should.have.ownProperty('attachments')
-          res.sentData.attachments.should.have.ownProperty('length')
-          res.sentData.attachments[0].should.be.ok
-          res.sentData.attachments[0].should.have.ownProperty('image_url')
+          res.sentData.should.have.ownProperty('channelData')
+          res.sentData.channelData.should.have.ownProperty('attachments')
+          res.sentData.channelData.attachments.should.have.ownProperty('length')
+          res.sentData.channelData.attachments[0].should.be.ok
+          res.sentData.channelData.attachments[0].should.have.ownProperty('image_url')
         })
     })
   })

@@ -17,62 +17,18 @@ var appSecret = process.env.appSecret || 'ec470402ed6d4f2c9e40e597bc4cff73'
 var credentials = new msRest.BasicAuthenticationCredentials(appId, appSecret)
 
 // Handle incoming message
-server.post('/v1/messages', verifyBotFramework(credentials), function (req, res) {
+server.post('/v1/messages', verifyBotFramework(credentials), (req, res) => {
   var msg = req.body
   console.log(req.body.text)
   const [name] = req.body.text.split(';')
-  sendMessage(name, function () {
-    console.log('after sendMessage')
-  })
+  sendMessage(name)
 
   if (name === 'memes') {
     console.log('get list of memes')
-    memes.returnAvailableMemes(req, function (message) {
-      var reply = {
-        'replyToMessageId': msg.id,
-        'to': msg.from,
-        'from': msg.to,
-        'type': 'Message',
-        'language': 'en',
-        'text': message
-      }
-      res.send(reply)
-    })
+    return memes.returnAvailableMemes(req, msg, res)
   } else {
     console.log('get one meme')
-    memes.returnMeme(req, function (message, link) {
-      if (!link) {
-        link = ''
-      }
-      var reply = {
-        'type': 'Message',
-        'language': 'en',
-        'text': '',
-        'channelData':
-        {
-          'attachments': [
-            {
-              'title': message,
-              'title_link': '',
-              'text': '',
-              'fields': [
-                {
-                  'title': '',
-                  'value': '',
-                  'short': false
-                }
-              ],
-
-              'image_url': link,
-              'thumb_url': link
-            }
-          ],
-          'unfurl_links': false,
-          'unfurl_media': false
-        }
-      }
-      res.send(reply)
-    })
+    return memes.returnMeme(req, res)
   }
 })
 
@@ -84,24 +40,18 @@ server.listen(process.env.PORT || 5000, function () {
 // Middleware to verfiy that requests are only coming from the Bot Connector Service
 function verifyBotFramework (credentials) {
   return function (req, res, next) {
-    console.log('verifyBotFramework')
     next()
   }
 }
 
 // Helper function to send a Bot originated message to the user.
-function sendMessage (msg, cb) {
-  console.log('sendMessage')
+function sendMessage (msg) {
   var client = new Connector(credentials)
-  console.log('after client is created')
   var options = {customHeaders: {'Ocp-Apim-Subscription-Key': credentials.password}}
   client.messages.sendMessage(msg, options, function (err, result, request, response) {
     if (!err && response && response.statusCode >= 400) {
       console.log(response.statusMessage)
       err = new Error('Message rejected with ' + response.statusMessage)
-    }
-    if (cb) {
-      cb(err)
     }
   })
 }
