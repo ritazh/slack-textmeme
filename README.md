@@ -3,7 +3,7 @@
 
 _A Slackbot that creates a meme with text_.
 
-![Slack Text Meme Demo](textmeme.gif)
+![Slack Text Meme Demo](botdemo.gif)
 
 This Slackbot creates a meme with text overlay using [memegen](http://memegen.link).
 
@@ -17,16 +17,18 @@ Clone this repo and then install dependencies:
     npm install
 
 Push directly to Azure Web App:
-    The current Travis CI is setup to push directly to an Azure web app
+     The [botframework branch](https://github.com/ritazh/slack-textmeme/tree/botframework) has been setup to push directly to Azure web app
     
 Setup the server (using Deis):
 
     deis create
     git push deis botframeworkdeis
 
+> NOTE: The botframeworkdeis branch has been setup to enable Travis CI to push directly to Deis.
+
 
 Setup Slack bot:
-* Follow the instructions on Bot Framework website to setup a Slack Channel
+* Follow the instructions on [Bot Framework website](https://dev.botframework.com/bots) to setup a Slack Channel.
 
 ## Usage
 
