@@ -40,7 +40,14 @@ server.listen(process.env.PORT || 5000, function () {
 // Middleware to verfiy that requests are only coming from the Bot Connector Service
 function verifyBotFramework (credentials) {
   return function (req, res, next) {
-    next()
+    if (req.authorization &&
+        req.authorization.basic &&
+        req.authorization.basic.username === credentials.userName &&
+        req.authorization.basic.password === credentials.password) {
+      next()
+    } else {
+      res.send(403)
+    }
   }
 }
 
