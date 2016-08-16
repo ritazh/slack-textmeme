@@ -17,7 +17,7 @@ Clone this repo and then install dependencies:
     npm install
 
 Push directly to Azure Web App:
-     The [botframework branch](https://github.com/ritazh/slack-textmeme/tree/botframework) has been setup to push directly to Azure web app
+     The [botframework branch](https://github.com/ritazh/slack-textmeme/tree/botframework) has been setup to synch directly to Azure web app
     
 Setup the server (using Deis):
 
