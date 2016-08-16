@@ -2,6 +2,8 @@ language: node_js
 node_js:
 - 6.0.0
 sudo: false
+notifications:
+  slack: zirateam:rmEf4yIGv0bihKpnWIZDhySs
 cache:
   directories:
   - node_modules
@@ -15,5 +17,3 @@ deploy:
   script: bash ./deploy.sh
   on:
     branch: botframeworkdeis
-notifications:
-  slack: zirateam:rmEf4yIGv0bihKpnWIZDhySs
