@@ -44,7 +44,7 @@ describe('Memes', () => {
         .then(() => {
           res.sentData.should.be.ok
           res.sentData.should.have.ownProperty('channelData')
-          res.sentData.channelData.should.have.ownProperty('attachments')
+          res.sentData.channelData.should.have.ownProperty('attachment')
           res.sentData.channelData.attachments.should.have.ownProperty('length')
           res.sentData.channelData.attachments[0].should.be.ok
           res.sentData.channelData.attachments[0].should.have.ownProperty('image_url')
