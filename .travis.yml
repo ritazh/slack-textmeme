@@ -1,9 +1,16 @@
+env:
+  global:
+    - secure: "jZIU+mx4MDjqVFMyQsyzXM2QuQRAzcHNzumJMHlb+OXHZwS+NtACQQ3jKwnAXInDglKhUVdx7ncVOP/7FpWD9I/o89pYpGSBiAO4BfxgLDwR38ugpNbwnoVScKFvKApeCmm6E76ITdEvZiUkEUPQzKlDwVQTUhSeJXbHgSjQwRVRuL7aw19G3vHdqFm8BgVJCSiz0dAZC7IxmKZ/dDhNHWzCKZM5SBwJuThw+wsWH4BK/GsAr6xJRJJYSp1eeriF+TqBjcJM5zV0v7bWWsulCzfB5Zfjs9ePYqvYHHb+4HCp/k2fAYD4lC/tT4Z89vuAQsZE4JiMQ2QDyKEOTEx/UymIKo7Pnp4KUaxLMMDfvfFsUqcV4BRyCYy0dpbdALfCClD7oBndXx9jF6FZynpzjgwmhLOROI3MnTAVNdHhtTg1vxVoTUbEJXqBabd8xuztmUm6eQy3L6kFiVCA+CA9hZLat6+/fm/mlhyBWyDtm2nP2xbb6QJgzxBKuOYnrIGnBpt3wOKFP6jLnK57PfYWjzcdPyEyaYzetmMpOGxDXutGpZ2eujvDRoVxyjti83XSvltb+5L65nnfrWPWMHyyJU5kpLk2D1vkKVhL3v4RQKkV9RSUPuW1pK/tn+3VZcRA1u5jfXPiWL1+3F6EhNDM4OhuJTxK2i0/QOorLJKDeeI=" # DOCKER_USER
+    - secure: "e3AT+t30S5OSUDl2uJR8wzpsYD8/XJmQP+AbA4mFrj4qCDAa7Er6fyHNGlszOtimO7Bm5XVBFILlmBjsXZDc9t5SE2e5KmnAQUfZQjg0u6WaCS6YT+vGuYwNw08mhQyN/ClHXsAqqS06khg4oZK8ddzL+w9vtSzK7W1IXFUsZulGwVxkqkiISwXDA/dqxJLbzA9KhwZXASMMcnXr1/cQ117WNm94nInI9AMcEjhEBdQYkwP57SHNglZWCyjeI7i3+zDxyCy1otCmieihWmzFxOBUHjfwo2tBWQtXz+Xhee7GvPr90DEJcI39fpj/9+VpP8Gi1Zm602K3wMLXsjASvlBkBZmWA7ST0SUuFVMGKDHHy2hXQYjKBArC95PnciRch7ko+chS6jTzan3ay0jVIlOmoX+Ems4irRUQmRF8Njsj6o0ExGzZdK299c9lOfT14K9SJBKHKu50CPqnG0j+3KuXizrsXKcj7f0siFWVarubpzxrhguSQ4GQ15r/GfJ9zMQuSYYlg4VC5+HMAIR2mqlO8xT8Tu9pDkEXhJ/394bLn8rSsODepyCxJ29CTxEhlbt9l5sL1iskh0q0SsRApjYrHMaT+uSip4j0nA5jq4OzSg522NNF/J1k6BidcM19R39WGh0FI6QUKuvJdwmA+OspCCMyx0vV3JvCjYsNthk=" # DOCKER_PASS
+    - COMMIT=${TRAVIS_COMMIT::8}
 language: node_js
 node_js:
 - 6.0.0
-sudo: false
+sudo: required
 notifications:
   slack: zirateam:rmEf4yIGv0bihKpnWIZDhySs
+services:
+  - docker
 cache:
   directories:
   - node_modules
@@ -11,9 +18,12 @@ install:
 - npm install
 script:
 - npm test
-deploy:
-  skip_cleanup: true
-  provider: script
-  script: bash ./deploy.sh
-  on:
-    branch: botframeworkdeis
+after_success:
+  - docker login -u $DOCKER_USER -p $DOCKER_PASS
+  - export REPO=ritazh/textmemebot
+  - export TAG=`if [ "$TRAVIS_BRANCH" == "botframeworkdeisstartjs" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
+  - docker build -f Dockerfile -t $REPO:$COMMIT .
+  - docker tag $REPO:$COMMIT $REPO:$TAG
+  - docker tag $REPO:$COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER
+  - docker push $REPO
+  - ./dockerdeploy.sh
