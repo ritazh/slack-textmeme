@@ -2,7 +2,7 @@
   "name": "slack-textmeme",
   "version": "1.1.0",
   "description": "A Slackbot that creates a meme with text",
-  "main": "index.js",
+  "main": "app.js",
   "dependencies": {
     "body-parser": "^1.14.2",
     "botbuilder": "^1.0.1",
