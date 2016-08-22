@@ -29,6 +29,6 @@ git remote add deis $GIT_TARGET_URL
 
 curl -sSL http://deis.io/deis-cli/install.sh | sh -s 1.12.2
 ./deis login http://deis.deisdemo.40.84.5.106.xip.io --username=deis --password=deis
-./deis pull ritazh/textmemebot
+./deis pull ritazh/decodedshow
 
 echo 'Deployed Latest Version to Deis'
