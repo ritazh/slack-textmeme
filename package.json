@@ -1,7 +1,7 @@
 {
-  "name": "slack-textmeme",
+  "name": "textmeme",
   "version": "1.1.0",
-  "description": "A Slackbot that creates a meme with text",
+  "description": "A bot that creates a meme with text",
   "main": "app.js",
   "dependencies": {
     "body-parser": "^1.14.2",
@@ -25,7 +25,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ritazh/slack-textmeme.git"
+    "url": "git+https://github.com/MicrosoftDX/DecodedEpisode3.git"
   },
   "engines": {
     "node": ">=6.0.0"
@@ -33,7 +33,7 @@
   "author": "ritazh",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ritazh/slack-textmeme/issues"
+    "url": "https://github.com/MicrosoftDX/DecodedEpisode3/issues"
   },
-  "homepage": "https://github.com/ritazh/slack-textmeme#readme"
+  "homepage": "https://github.com/MicrosoftDX/DecodedEpisode3#readme"
 }
